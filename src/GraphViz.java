@@ -16,9 +16,9 @@ public class GraphViz {
         }
     }
 
-    public String generateGraphViz(LinkedList<Integer> edges){
+    public String generateGraphViz(LinkedList<Integer> edges, int routeNumber){
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("graph G { \nrankdir = LR; \n" +
+        stringBuilder.append("graph G Route " + routeNumber + "{ \nrankdir = LR; \n" +
                 "node [shape= circle style=filled fillcolor=\"#FFFFFF\"]; \n");
 
         ArrayList<String> vertexToPrint = (ArrayList<String>)vertexListToPrint.clone();

@@ -34,8 +34,10 @@ public class Vikings {
         }
 
         graph.calculateLongestPath();
+        int alternativeRoutesCount = 0;
         for(LinkedList<Integer> path : graph.getLongestPath()) {
-            System.out.println(graphViz.generateGraphViz(path));
+            alternativeRoutesCount++;
+            System.out.println(graphViz.generateGraphViz(path, alternativeRoutesCount));
         }
     }
 
