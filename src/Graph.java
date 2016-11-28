@@ -1,15 +1,13 @@
 import java.util.Iterator;
 import java.util.LinkedList;
 
-// This class represents an undirected graph using adjacency list
-// representation
+// This class represents an undirected graph using adjacency list representation
 public class Graph {
 
-    private int numberOfVertices;   // No. of vertices
+    private int numberOfVertices;
 
     private LinkedList<LinkedList<Integer>> longestPath;
 
-    // Array  of lists for Adjacency List Representation
     private LinkedList<Integer> arrayOfAdjacencyLists[];
 
     public Graph(int numberOfVertices) {
@@ -21,7 +19,6 @@ public class Graph {
         }
     }
 
-    //Function to add an edge into the graph
     public void addEdge(int go, int to) throws IllegalStateException {
         addDirectedEdge(go, to);
         addDirectedEdge(to, go);
@@ -43,11 +40,13 @@ public class Graph {
     }
 
     public int getMaximumDistance(){
+        if(longestPath.isEmpty()){
+            return 0;
+        }
         return longestPath.getFirst().size()-1;
     }
 
-    private void eulerianWalk(int previousVertices, int vertices, LinkedList<Integer> visited[],
-                              LinkedList<Integer> path) {
+    private void eulerianWalk(int previousVertices, int vertices, LinkedList<Integer> visited[], LinkedList<Integer> path) {
         // Mark the current vertices as visited
         if (vertices != previousVertices) {
             visited[previousVertices].add(vertices);
@@ -103,7 +102,7 @@ public class Graph {
 
     private void addDirectedEdge(int go, int to) throws IllegalStateException {
         if (arrayOfAdjacencyLists[go].size() < 3) {
-            arrayOfAdjacencyLists[go].add(to);// Add to to go's list.
+            arrayOfAdjacencyLists[go].add(to);
         } else {
             throw new IllegalStateException("List is already at maximum size of 3");
         }
