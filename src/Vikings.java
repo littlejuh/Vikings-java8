@@ -3,13 +3,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 
 public class Vikings {
-
-    private static String graphVizString;
-
     public static void main(String args[]) throws Exception {
 
         List<String> lines = new ArrayList<>();
@@ -25,62 +23,21 @@ public class Vikings {
         validateNrOfVertices(nrVertices);
 
         Graph graph = new Graph(nrVertices);
+        GraphViz graphViz = new GraphViz();
 
         for (String line : skipFirst(lines)) {
             if (!line.isEmpty()) {
                 String[] edgesLine = line.split(" ");
                 graph.addEdge(Integer.parseInt(edgesLine[0]), Integer.parseInt(edgesLine[1]));
-                toGraphViz(edgesLine[0], edgesLine[1]);
+                graphViz.addVertex(edgesLine[0], edgesLine[1]);
             }
         }
 
         graph.calculateLongestPath();
-
-       /* graph G {
-            rankdir = LR;
-            node [shape= circle style=filled fillcolor="#00ff005f"]
-            2
-            node [style=filled fillcolor="#fff"]
-            0 -- 2
-            1 -- 2
-            2 -- 3
-            3 -- 4
-            3 -- 5
-            4 -- 6
-            5 -- 7
-            6 -- 8
-            7 -- 8
-            7 -- 9
-            8 -- 10
-            9 -- 11
-            10 -- 12
-            11 -- 12
-            10 -- 13
-            12 -- 14
-        }*/
-
-
-        System.out.println("graph G { \n rankdir = LR; \n");
-
-        System.out.println("node [shape= circle style=filled fillcolor=\"#FFFFFF\"]; ");
-
-        /*for (int node : graph.getLongestPath().get(0))
-*/
-
-
-        System.out.println(graphVizString);
-
-        System.out.println("}\n");
-    }
-
-    private static void toGraphViz(String s1, String s2) {
-        if(graphVizString == null){
-            graphVizString = " " +  s1 + " -- " + s2 + "\n";
-        }else{
-            graphVizString = graphVizString + " " +  s1 + " -- " + s2 + "\n";
+        for(LinkedList<Integer> path : graph.getLongestPath()) {
+            System.out.println(graphViz.generateGraphViz(path));
         }
     }
-
 
     public static <T> Iterable<T> skipFirst(final Iterable<T> c) {
         return () -> {
