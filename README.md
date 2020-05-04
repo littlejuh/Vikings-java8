@@ -561,7 +561,7 @@ _}_
 
 ![](https://i.imgur.com/b4vUDtt.png)
 
-_Picture 3 - maior caminho encontrado pelo arquivo t6.in_
+_Picture 3 - longest path found by the file t6.in_
 
 **Input 7**
 
